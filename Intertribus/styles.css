@@ -1,5 +1,7 @@
 * {
     font-family: "Poppins",sans-serif;
+    margin: 0%;
+    padding: 0%;
 }
 
 body {
@@ -18,13 +20,18 @@ header, main, footer {
     box-sizing: border-box;
 }
 
+/*--------- HEADER SECTION ----------*/
+
 .header {
+    container-name: --header;
+    container-type: inline-size;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
     min-height: 70px;
     background-color: #111;
+    position: relative;
 }
 
 .link--logo {
@@ -44,14 +51,165 @@ span {
 }
 
 .menu--image--button {
+    object-fit: cover;
+    height: 45px;
     width: 45px;
     filter: invert(1);
+    cursor: pointer;
 }
 
-nav {
+.nav {
+    background-color: #111;
     display: none;
+    position: absolute;
+    top: 0%;
+    right: 0;
+    z-index: 10;
+    color: #eee;
 }
 
 #button--menu {
     display: none;
 }
+
+#button--menu:checked ~ .nav {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    animation: aparecer--menu 1s forwards;
+}
+
+.exit--button {
+    padding: 10px 40px;
+    font-size: 2rem;
+    display: block;
+    height: 0;
+    cursor: pointer;
+}
+
+.nav--list {
+    box-sizing: border-box;
+    display: flex;
+    height: 90%;
+    list-style: none;
+    padding: 0%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    margin: auto;
+}
+
+.list--item {
+    font-size: 1.2rem;
+    padding: 20px 20px 20px 0;
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    transition-property: border-bottom;
+    transition-duration: .4s;
+}
+
+.list--item:hover {
+    border-bottom: 2px solid #f90;
+    transition-duration: .4s;
+}
+
+.list--item--intertribus {
+    display: flex;
+    justify-content: space-between;
+}
+
+.next--section {
+    padding: 0;
+    font-size: 1.2rem;
+    border: none;
+    margin: 0%;
+    background-color: transparent;
+    color: #eee;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.list--item--link {
+    text-decoration: none;
+    color: #eee;
+}
+
+/*---------- HEADER QUERIES -----------*/   
+
+@container --header (min-width:60rem) {
+    #button--menu:not(:checked) ~ .nav {
+        display: flex;
+    }
+    .header--label--button {
+        display: none;
+    }
+    .nav {
+        width: auto;
+        position: static;
+        height: auto;
+        background-color: transparent;
+    }
+    .nav--list {
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    .list--item {
+        border: none;
+        padding: 0%;
+        display: inline-block;
+        width: auto;
+    }
+    .list--item--intertribus {
+        padding: 0%;
+        font-size: 1.2rem;
+        display: inline-block;
+    }
+    .list--item--link {
+        padding: 10px;
+        font-size: 1.2rem;
+        display: inline-block;
+    }
+    .list--item--link:hover, .list--item--intertribus:hover{
+        color: #f90;
+        cursor: pointer;
+    }
+    .exit--button {
+        display: none;
+    }
+    .list--item:hover {
+        border: none;
+    }
+    .next--section {
+        display: none;
+    }
+}
+
+@keyframes aparecer--menu {
+    from {
+        background-color: #111;
+        position: absolute;
+        top: 0%;
+        right: 0;
+        z-index: 10;
+        height: 100vh;
+        width: 0;
+        color: #eee;
+        opacity: 0;
+    }
+
+    to {
+        background-color: #111;
+        position: absolute;
+        top: 0%;
+        right: 0;
+        z-index: 10;
+        height: 100vh;
+        width: 100vw;
+        color: #eee;
+        opacity: 1;
+    }
+}
+
